@@ -1,0 +1,93 @@
+<div class=" container-scroller">
+  <!--Navbar-->
+  <nav class="navbar bg-primary-gradient col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
+    <div class="bg-white text-center navbar-brand-wrapper">
+      <a class="navbar-brand brand-logo" href="#">
+        <img src="./assets/images/logo_star_black.png" />
+      </a>
+      <a class="navbar-brand brand-logo-mini" href="#">
+        <img src="./assets/images/logo_star_mini.jpg" alt="">
+      </a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center">
+      <button class="navbar-toggler navbar-toggler hidden-md-down align-self-center mr-3" type="button" data-toggle="minimize">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="mt-2 hidden-md-down">
+        <h4 id="ComponentTitle" class="mt-2 text text-white"></h4>
+      </div>
+      
+      
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up align-self-center" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <!--End navbar-->
+  <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+      <nav class="bg-white sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item" >
+            <a class="nav-link" data-toggle="collapse"  routerLink="/client/ematerial" aria-expanded="false" aria-controls="collapseExample">
+              <!-- <i class="fa fa-address-book"></i> -->
+              <img src="./assets/images/ematerials.png" alt="">
+              <span class="menu-title text-primary" id="eMaterialItem">E-Materials
+                
+              </span>
+            </a>
+            
+          </li>
+
+          <li class="nav-item" >
+            <a class="nav-link" data-toggle="collapse"  routerLink="/client/tip" aria-expanded="false" aria-controls="collapseExample">
+              <!-- <i class="fa fa-address-book"></i> -->
+              <img src="./assets/images/tips.png" alt="">
+              <span class="menu-title  text-primary" id="TipItem">Tips
+                
+              </span>
+            </a>
+            
+            
+          </li>
+
+          <li class="nav-item" >
+            <a class="nav-link" data-toggle="collapse"  routerLink="/client/video" aria-expanded="false" aria-controls="collapseExample">
+              <!-- <i class="fa fa-address-book"></i> -->
+              <img src="./assets/images/video.png" alt="">
+              <span class="menu-title  text-primary" id="VideoItem">Videos
+               
+              </span>
+            </a>
+            
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse"  routerLink="/client/news" aria-expanded="false" aria-controls="collapseExample">
+              <!-- <i class="fa fa-address-book"></i> -->
+              <img src="./assets/images/news.png" alt="">
+              <span class="menu-title  text-primary" id="NewsItem">News
+                
+              </span>
+            </a>
+            
+          </li>
+        </ul>
+      </nav>
+      <!-- SIDEBAR ENDS -->
+
+
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      <footer class="footer fixed-bottom">
+        <div class="container-fluid clearfix">
+          <span class="float-right">
+            <a href="#">Saigontech English Club</a> &copy; 2018
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</div>
