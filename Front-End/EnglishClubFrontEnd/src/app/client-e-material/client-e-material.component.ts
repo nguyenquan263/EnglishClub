@@ -74,7 +74,7 @@ export class ClientEMaterialComponent implements OnInit {
       success: function (data) {
         self.files = data.data;
         for (var i = 0; i < self.files.length; i++){
-          $("#materialContent").append("<a href='"+fileLink+self.files[i].name+"'>"+self.files[i].name+"<a><br/>");
+          $("#materialContent").append("<a href='"+self.files[i].link+"' target='_blank' > File "+(i+1)+"<a><br/>");
         }
       },
       error: function (data) {

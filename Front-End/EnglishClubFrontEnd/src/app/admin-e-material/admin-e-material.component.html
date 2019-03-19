@@ -93,7 +93,7 @@
               <button class="btn btn-primary" id="addEbookButton" (click)="addEbookListener()">Add Ebook</button>
             </div>
             <div class="col-sm-10 mt-2 " id="addEbookInput">
-              <input type="file" class="form-control-file" id="ebookChooser">
+              <input type="text" class="form-control-file" id="ebookChooser">
             </div>
 
             <div class="col-sm-12 mt-2">
@@ -101,7 +101,7 @@
                 <thead class="bg-light">
                   <tr>
                     <th>#</th>
-                    <th>File Name</th>
+                    <th>File Link</th>
                     
                     <th></th>
                   </tr>
@@ -109,7 +109,7 @@
                 <tbody id="ebookBody">
                   <tr *ngFor="let ebook of ebooks; let i = index">
                     <td>{{i+1}}</td>
-                    <td><a [href]="getDownloadLink(ebook.name)">{{ebook.name}}</a></td>
+                    <td><a [href]="getDownloadLink(ebook.name)">{{ebook.link}}</a></td>
                    
                     <td><i (click)="deleteEbook(ebook.id)" class="fa fa-remove text-danger pointer"></i></td>
                   </tr>

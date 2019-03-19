@@ -156,7 +156,7 @@ export class AdminEMaterialComponent implements OnInit {
     });
 
     $("#addEbookBTN").click(function () {
-      $("#ebookContainer").append("<input name='ebookChooser' type='file' class='form-control-file mb-2'/>");
+      $("#ebookContainer").append("<input name='ebookChooser' type='text' class='form-control-file mb-2'/>");
     });
 
     $("#btnSave").click(function () {
@@ -171,7 +171,7 @@ export class AdminEMaterialComponent implements OnInit {
 
         addData.append("postdate", self.date2str(new Date, "dd/MM/yyyy"));
         $('input[name=ebookChooser]').each(function () {
-          addData.append("ebooks", $(this)[0].files[0]);
+          addData.append("links", $(this).val());
         });
 
         $.ajax({
@@ -422,7 +422,7 @@ export class AdminEMaterialComponent implements OnInit {
 
       var fileData = new FormData();
       fileData.append("materialID", rowId+"");
-      fileData.append("ebookFile", $("#ebookChooser")[0].files[0])
+      fileData.append("link", $("#ebookChooser").val());
       fileData.append("status", "true");
 
 
