@@ -2,10 +2,10 @@
   <!--Navbar-->
   <nav class="navbar bg-primary-gradient col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
     <div class="bg-white text-center navbar-brand-wrapper">
-      <a class="navbar-brand brand-logo" href="#">
+      <a class="navbar-brand brand-logo" routerLink="/manage/ematerialtypes">
         <img src="./assets/images/logo_star_black.png" />
       </a>
-      <a class="navbar-brand brand-logo-mini" href="#">
+      <a class="navbar-brand brand-logo-mini" routerLink="/manage/ematerialtypes">
         <img src="./assets/images/logo_star_mini.jpg" alt="">
       </a>
     </div>
@@ -111,6 +111,15 @@
               <img src="./assets/images/list.png" alt="">
               <span class="menu-title">
                 <b>Video Types</b>
+              </span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a id="logOutButton" class="nav-link text-danger" data-toggle="collapse" routerLink="/manage/videotypes" aria-expanded="false" aria-controls="collapseExample">
+              <i class="fa fa-sign-out"></i>
+              <span class="menu-title">
+                <b>Log out</b>
               </span>
             </a>
           </li>

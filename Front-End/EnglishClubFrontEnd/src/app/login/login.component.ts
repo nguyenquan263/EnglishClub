@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           self.cookie.set("adminID", dataLogin.adminID);
           self.cookie.set("fullName", dataLogin.fullName);
           self.cookie.set("accessToken", dataLogin.accessToken);
-          self.router.navigate(['/manage/video']);
+          self.router.navigate(['/manage/ematerialtypes']);
         } else {
           $("#errorMessage").text(data.message);
         }

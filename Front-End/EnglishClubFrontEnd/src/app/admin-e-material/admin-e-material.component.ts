@@ -40,6 +40,7 @@ var addFileMethod: string;
 
 
 
+
 @Component({
   selector: 'app-admin-e-material',
   templateUrl: './admin-e-material.component.html',
@@ -48,11 +49,16 @@ var addFileMethod: string;
 })
 export class AdminEMaterialComponent implements OnInit {
   eMaterialTypes: any;
-  constructor(private connection: ConnectionService, private secureApi: SecureApiService, private cookie: CookieService) { }
+  header: any;
   ebooks: any;
+  constructor(private connection: ConnectionService, private secureApi: SecureApiService, private cookie: CookieService) { }
+  
   ngOnInit() {
     $("#ComponentTitle").text("e-Materials Management");
     self = this;
+    this.header = {
+      "Authorization": "Bearer "+this.cookie.get("accessToken")
+    };
 
     getAllEMaterialURL = this.secureApi.ematerial.getAll.url;
     getAllEMaterialMethod = this.secureApi.ematerial.getAll.method;
@@ -83,6 +89,7 @@ export class AdminEMaterialComponent implements OnInit {
     $.ajax({
       url: getAllEMaterialTypeURL,
       type: getAllEMaterialTypeMethod,
+      headers: self.header,
       success: function (data) {
         self.eMaterialTypes = data.data;
         console.log(self.eMaterialTypes);
@@ -156,7 +163,7 @@ export class AdminEMaterialComponent implements OnInit {
     });
 
     $("#addEbookBTN").click(function () {
-      $("#ebookContainer").append("<input name='ebookChooser' type='text' class='form-control-file mb-2'/>");
+      $("#ebookContainer").append("<input name='ebookChooser' placeholder='Enter a link of ebook here...' type='text' class='form-control-file mb-2'/>");
     });
 
     $("#btnSave").click(function () {
@@ -176,6 +183,7 @@ export class AdminEMaterialComponent implements OnInit {
 
         $.ajax({
           url: addEMaterialURL,
+          headers: self.header,
           data: addData,
           type: addEMaterialMethod,
           processData: false,
@@ -211,6 +219,7 @@ export class AdminEMaterialComponent implements OnInit {
         $.ajax({
           url: updateEMaterialURL + eMaterialData.id,
           data: updateData,
+          headers: self.header,
           type: updateEMaterialMethod,
           processData: false,
           contentType: false,
@@ -240,6 +249,7 @@ export class AdminEMaterialComponent implements OnInit {
     $.ajax({
       url: getAllEMaterialURL,
       type: getAllEMaterialMethod,
+      headers: self.header,
       success: function (data) {
         console.log(data);
         if (data.errorCode == 0) {
@@ -273,6 +283,7 @@ export class AdminEMaterialComponent implements OnInit {
               $.ajax({
                 url: deleteEMaterialURL + rowId,
                 type: deleteEMaterialMethod,
+                headers: self.header,
                 success: function (data) {
                   if (data.errorCode == 0) {
                     $.alert('Material has been deleted!');
@@ -317,6 +328,7 @@ export class AdminEMaterialComponent implements OnInit {
       $.ajax({
         url: getAllFileByMaterialIDURL + rowId,
         type: getAllFileByMaterialIDMethod,
+        headers: self.header,
         success: function (data) {
           console.log(data);
           //load list of file to table
@@ -363,12 +375,15 @@ export class AdminEMaterialComponent implements OnInit {
             $.ajax({
               url: DeleteFileURL + ebookID,
               type: DeleteFileMethod,
+              headers: self.header,
               success: function (data) {
+                console.log(data);
                 if (data.errorCode == 0) {
                   $.alert('Ebook has been deleted!');
 
                   $.ajax({
                     url: getAllFileByMaterialIDURL + rowId,
+                    headers: self.header,
                     type: getAllFileByMaterialIDMethod,
                     success: function (data) {
                       console.log(data);
@@ -379,6 +394,7 @@ export class AdminEMaterialComponent implements OnInit {
                       }
                     },
                     error: function (data) {
+                      console.log(data);
                       return null;
                     }
                   });
@@ -430,6 +446,7 @@ export class AdminEMaterialComponent implements OnInit {
         url: addFileURL,
         data: fileData,
         type: addFileMethod,
+        headers: self.header,
         processData: false,
         contentType: false,
         success: function (data) {
@@ -440,6 +457,7 @@ export class AdminEMaterialComponent implements OnInit {
             $.ajax({
               url: getAllFileByMaterialIDURL + rowId,
               type: getAllFileByMaterialIDMethod,
+              headers: self.header,
               success: function (data) {
                 console.log(data);
                 //load list of file to table

@@ -25,7 +25,7 @@ import vn.edu.saigontech.SGTEnglishClub.Responses.LoginResponse;
 import vn.edu.saigontech.SGTEnglishClub.Responses.LoginResponseStandard;
 
 public class TokenAuthenticationService {
-	static final long EXPIRATIONTIME = 120_000;
+	static final long EXPIRATIONTIME = 1200_0000;
 	static final String SECRET = "Saigontech";
 	static final String TOKEN_PREFIX = "Bearer";
 	static final String HEADER_STRING = "Authorization";

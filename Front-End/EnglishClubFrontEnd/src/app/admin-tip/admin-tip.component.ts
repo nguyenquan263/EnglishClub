@@ -27,11 +27,16 @@ var updateTipMethod: string;
 })
 export class AdminTipComponent implements OnInit {
   tipTypes: any;
+  header: any;
   constructor(private secureApi: SecureApiService, private cookie: CookieService) { }
 
   ngOnInit() {
     $("#ComponentTitle").text("Tips Management");
     self = this;
+
+    this.header = {
+      "Authorization": "Bearer "+this.cookie.get("accessToken")
+    };
 
     getAllTipTypeURL = this.secureApi.tipType.getAll.url;
     getAllTipTypeMethod = this.secureApi.tipType.getAll.method;
@@ -47,6 +52,7 @@ export class AdminTipComponent implements OnInit {
     $.ajax({
       url: getAllTipTypeURL,
       type: getAllTipTypeMethod,
+      headers: self.header,
       success: function (data) {
         self.tipTypes = data.data;
         console.log(self.tipTypes);
@@ -140,6 +146,7 @@ export class AdminTipComponent implements OnInit {
           data: addData,
           type: addTipMethod,
           processData: false,
+          headers: self.header,
           contentType: false,
           success: function (data) {
             if (data.errorCode == 0) {
@@ -171,6 +178,7 @@ export class AdminTipComponent implements OnInit {
         $.ajax({
           url: updateTipURL+tipData.id,
           data: updateData,
+          headers: self.header,
           type: updateTipMethod,
           processData: false,
           contentType: false,
@@ -198,6 +206,7 @@ export class AdminTipComponent implements OnInit {
     $.ajax({
       url: getAllTipURL,
       type: getAllTipMethod,
+      headers: self.header,
       success: function (data) {
         console.log(data);
         if (data.errorCode == 0) {
@@ -231,6 +240,7 @@ export class AdminTipComponent implements OnInit {
               $.ajax({
                 url: deleteTipURL + rowId,
                 type: deleteTipMethod,
+                headers: self.header,
                 success: function (data) {
                   if (data.errorCode == 0) {
                     $.alert('Tip has been deleted!');

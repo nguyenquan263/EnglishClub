@@ -30,7 +30,7 @@ var rowId: number;
   providers: [SecureApiService, CookieService, ConnectionService]
 })
 export class AdminVideoTypeComponent implements OnInit {
-
+  header: any;
   constructor(private connection: ConnectionService, private secureApi: SecureApiService, private cookie: CookieService) { }
 
   ngOnInit() {
@@ -38,6 +38,9 @@ export class AdminVideoTypeComponent implements OnInit {
     $("#ComponentTitle").text("Video Types Management");
 
     self = this;
+    this.header = {
+      "Authorization": "Bearer "+this.cookie.get("accessToken")
+    };
 
     getAllVideoTypesURL = this.secureApi.videoTypes.getAll.url;
     getAllVideoTypesMethod = this.secureApi.videoTypes.getAll.method;
@@ -123,6 +126,7 @@ export class AdminVideoTypeComponent implements OnInit {
       $.ajax({
         url: addVideoTypesURL,
         data: JSON.stringify(addData),
+        headers: self.header,
         type: "POST",
         contentType: "application/json",
         success: function (data) {
@@ -153,6 +157,7 @@ export class AdminVideoTypeComponent implements OnInit {
         url: updateVideoTypesURL,
         data: JSON.stringify(updateData),
         type: updateVideoTypesMethod,
+        headers: self.header,
         contentType: "application/json",
         success: function (data) {
           if (data.errorCode == 0) {
@@ -178,6 +183,7 @@ export class AdminVideoTypeComponent implements OnInit {
     $.ajax({
       url: getAllVideoTypesURL,
       type: getAllVideoTypesMethod,
+      headers: self.header,
       success: function (data) {
         console.log(data);
         if (data.errorCode == 0) {
@@ -212,6 +218,7 @@ export class AdminVideoTypeComponent implements OnInit {
                 $.ajax({
                   url: deleteVideoTypesURL + rowId,
                   type: deleteVideoTypesMethod,
+                  headers: self.header,
                   success: function (data) {
                     if (data.errorCode == 0) {
                       $.alert('This type has been deleted!');

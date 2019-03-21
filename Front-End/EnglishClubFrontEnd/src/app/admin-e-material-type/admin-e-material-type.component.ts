@@ -23,7 +23,6 @@ var deleteEMaterialTypesURL: string;
 var deleteEMaterialTypesMethod: string;
 
 var rowId: number;
-
 @Component({
   selector: 'app-admin-e-material-type',
   templateUrl: './admin-e-material-type.component.html',
@@ -31,6 +30,7 @@ var rowId: number;
   providers: [SecureApiService, CookieService, ConnectionService]
 })
 export class AdminEMaterialTypeComponent implements OnInit {
+  header: any;
 
   constructor(private connection: ConnectionService, private secureApi: SecureApiService, private cookie: CookieService) { }
 
@@ -40,6 +40,9 @@ export class AdminEMaterialTypeComponent implements OnInit {
     $("#ComponentTitle").text("e-Material Types Management");
 
     self = this;
+    this.header = {
+      "Authorization": "Bearer "+this.cookie.get("accessToken")
+    };
 
     getAllEMaterialTypesURL = this.secureApi.ematerialTypes.getAll.url;
     getAllEMaterialTypesMethod = this.secureApi.ematerialTypes.getAll.method;
@@ -116,6 +119,7 @@ export class AdminEMaterialTypeComponent implements OnInit {
 
   $("#btnSave").click(function(){
     var id = $("#hidId").val();
+
     if (id == 0) {
     
       var addData = {
@@ -125,6 +129,7 @@ export class AdminEMaterialTypeComponent implements OnInit {
       $.ajax({
         url: addEMaterialTypesURL,
         data: JSON.stringify(addData),
+        headers: self.header,
         type: "POST",
         contentType: "application/json",
         success: function (data) {
@@ -156,6 +161,7 @@ export class AdminEMaterialTypeComponent implements OnInit {
       $.ajax({
         url: updateEMaterialTypesURL,
         data: JSON.stringify(updateData),
+        headers: self.header,
         type: updateEMaterialTypesMethod,
         contentType: "application/json",
         success: function (data) {
@@ -182,6 +188,7 @@ export class AdminEMaterialTypeComponent implements OnInit {
     $.ajax({
       url: getAllEMaterialTypesURL,
       type: getAllEMaterialTypesMethod,
+      headers: self.header,
       success: function (data) {
         console.log(data);
         if (data.errorCode == 0) {
@@ -216,6 +223,7 @@ export class AdminEMaterialTypeComponent implements OnInit {
                 $.ajax({
                   url: deleteEMaterialTypesURL + rowId,
                   type: deleteEMaterialTypesMethod,
+                  headers: self.header,
                   success: function (data) {
                     if (data.errorCode == 0) {
                       $.alert('This type has been deleted!');

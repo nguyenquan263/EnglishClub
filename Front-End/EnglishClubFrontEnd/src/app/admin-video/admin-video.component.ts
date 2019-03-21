@@ -29,11 +29,15 @@ var updateVideoMethod: string;
 })
 export class AdminVideoComponent implements OnInit {
   videoTypes: any;
+  header: any;
   constructor(private secureApi: SecureApiService, private cookie: CookieService) { }
 
   ngOnInit() {
     $("#ComponentTitle").text("Videos Management");
     self = this;
+    this.header = {
+      "Authorization": "Bearer "+this.cookie.get("accessToken")
+    };
 
     getAllVideoTypeURL = this.secureApi.videoTypes.getAllActive.url;
     getAllVideoTypeMethod = this.secureApi.videoTypes.getAllActive.method;
@@ -50,6 +54,7 @@ export class AdminVideoComponent implements OnInit {
     $.ajax({
       url: getAllVideoTypeURL,
       type: getAllVideoTypeMethod,
+      headers: self.header,
       success: function (data) {
         self.videoTypes = data.data;
         console.log(self.videoTypes);
@@ -151,6 +156,7 @@ export class AdminVideoComponent implements OnInit {
           url: addVideoURL,
           data: JSON.stringify(addData),
           type: addVideoMethod,
+          headers: self.header,
           contentType: "application/json",
           success: function (data) {
             if (data.errorCode == 0) {
@@ -182,6 +188,7 @@ export class AdminVideoComponent implements OnInit {
           url: updateVideoURL,
           data: JSON.stringify(updateData),
           type: updateVideoMethod,
+          headers: self.header,
           contentType: "application/json",
           success: function (data) {
             if (data.errorCode == 0) {
@@ -208,6 +215,7 @@ export class AdminVideoComponent implements OnInit {
     $.ajax({
       url: getAllVideoURL,
       type: getAllVideoMethod,
+      headers: self.header,
       success: function (data) {
         if (data.errorCode == 0) {
           tbl.clear().draw();
@@ -240,6 +248,7 @@ export class AdminVideoComponent implements OnInit {
               $.ajax({
                 url: deleteVideoURL + rowId,
                 type: deleteVideoMethod,
+                headers: self.header,
                 success: function (data) {
                   if (data.errorCode == 0) {
                     $.alert('Video has been deleted!');

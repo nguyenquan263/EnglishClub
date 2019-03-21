@@ -105,11 +105,13 @@
                     
                     <th></th>
                   </tr>
+
+
                 </thead>
                 <tbody id="ebookBody">
                   <tr *ngFor="let ebook of ebooks; let i = index">
                     <td>{{i+1}}</td>
-                    <td><a [href]="getDownloadLink(ebook.name)">{{ebook.link}}</a></td>
+                    <td><a [href]="ebook.link">{{ebook.link}}</a></td>
                    
                     <td><i (click)="deleteEbook(ebook.id)" class="fa fa-remove text-danger pointer"></i></td>
                   </tr>
